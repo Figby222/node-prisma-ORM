@@ -156,4 +156,25 @@ async function getAuthor() {
     }).then(console.log);
 }
 
-getAuthor();
+// getAuthor();
+
+
+
+
+async function updateAuthor() {
+    const updateAuthor = await prisma.user.update({
+        where: {
+            id: 4
+        },
+        data: {
+            posts: {
+                connect: {
+                    id: 4,
+                }
+            }
+        }
+
+    }).then(console.log)
+}
+
+updateAuthor();
