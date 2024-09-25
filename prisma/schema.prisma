@@ -41,6 +41,8 @@ model User {
   profile Profile?
   isAdmin Boolean @default(false)
   city    String
+
+  @@unique([name, city])
 }
 
 model Category {
