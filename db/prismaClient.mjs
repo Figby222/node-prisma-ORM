@@ -143,4 +143,17 @@ async function createUserAndPosts() {
     return userAndPosts
 }
 
-createUserAndPosts();
+// createUserAndPosts();
+
+async function getAuthor() {
+    const getAuthor = await prisma.user.findUnique({
+        where: {
+            id: 64
+        },
+        include: {
+            posts: true
+        },
+    }).then(console.log);
+}
+
+getAuthor();
