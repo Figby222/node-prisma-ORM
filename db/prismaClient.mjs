@@ -45,15 +45,15 @@ async function main() {
 }
 
 
-main()
-    .then(async () => {
-        await prisma.$disconnect();
-    })
-    .catch(async (err) => {
-        console.error(err);
-        await prisma.$disconnect();
-        process.exit(1);
-    })
+// main()
+//     .then(async () => {
+//         await prisma.$disconnect();
+//     })
+//     .catch(async (err) => {
+//         console.error(err);
+//         await prisma.$disconnect();
+//         process.exit(1);
+//     })
 
 
 
@@ -67,27 +67,64 @@ async function useQueries() {
         data: { id: 4}
     })
     await prisma.user.findMany().then(console.log);
-    await prisma.post.findMany({
-        where: {
-            OR: [
-                { title: { contains: "prisma" }},
-                { content: { contains: "prisma" }},
-                { title: { contains: "Hi" }},
-                { content: { contains: "Hi" }}
+    // await prisma.post.findMany({
+    //     where: {
+    //         OR: [
+    //             { title: { contains: "prisma" }},
+    //             { content: { contains: "prisma" }},
+    //             { title: { contains: "Hi" }},
+    //             { content: { contains: "Hi" }}
 
-            ]
-        }
-    }).then(console.log);
+    //         ]
+    //     }
+    // }).then(console.log);
 
-    await prisma.user.create({
-        data: {
-            name: "Me Ryan",
-            email: "Ryan@me.com",
-            posts: {
-                create: { title: "Hi" }
-            },
-        },
-    }).then(console.log);
+    // await prisma.user.create({
+    //     data: {
+    //         name: "Me Ryan",
+    //         email: "Ryan@me.com",
+    //         posts: {
+    //             create: { title: "Hi" }
+    //         },
+    //     },
+    // }).then(console.log);
 }
 
-useQueries();
+// useQueries();
+
+
+async function addUser() {
+    const user = await prisma.user.create({
+        data: {
+            email: "hi@me.com",
+            name: "me",
+            posts: {
+                create: [
+                    {
+                        title: "Hi, super awesome cool stuff",
+                        categories: {
+                            create: {
+                                name: "Super awesome cool stuff"
+                            },
+                        },
+                    },
+                    {
+                        title: "PostgreSQL database",
+                        categories: {
+                            create: [
+                                {
+                                    name: "Database"
+                                },
+                                {
+                                    name: "Super awesome cool learning stuff"
+                                },
+                            ],
+                        },
+                    }
+                ],
+            },
+        },
+    });
+}
+
+addUser();
