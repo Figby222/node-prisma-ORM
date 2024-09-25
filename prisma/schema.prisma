@@ -25,6 +25,8 @@ model Post {
   authorId   Int
   categories Category[]
   comments   Comment[]
+
+  @@unique ([authorId, title])
 }
 
 model Profile {
