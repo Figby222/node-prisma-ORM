@@ -1,21 +1,21 @@
 {
-  "name": "node-template",
+  "name": "node-prisma-orm",
   "version": "1.0.0",
-  "description": "A Node.js template repository",
+  "description": "A Node.js repository used to practice using Prisma ORM",
   "main": "index.mjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Figby222/node-template.git"
+    "url": "git+https://github.com/Figby222/node-prisma-ORM.git"
   },
   "author": "Figby222",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Figby222/node-template/issues"
+    "url": "https://github.com/Figby222/node-prisma-ORM/issues"
   },
-  "homepage": "https://github.com/Figby222/node-template#readme",
+  "homepage": "https://github.com/Figby222/node-prisma-ORM#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "connect-pg-simple": "^10.0.0",
