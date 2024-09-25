@@ -127,4 +127,20 @@ async function addUser() {
     });
 }
 
-addUser();
+// addUser();
+
+async function createUserAndPosts() {
+    const userAndPosts = await prisma.user.create({
+        data: {
+            posts: {
+                create: [
+                    { title: "blah blah blah" },
+                    { title: "blah blah blah blah" }
+                ]
+            }
+        }
+    })
+    return userAndPosts
+}
+
+createUserAndPosts();
