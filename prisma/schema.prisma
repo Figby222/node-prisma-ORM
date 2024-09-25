@@ -27,6 +27,7 @@ model Post {
   comments   Comment[]
 
   @@unique (name: "authorTitle", [authorId, title])
+  @@index ([title, content])
 }
 
 model Profile {
