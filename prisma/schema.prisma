@@ -44,7 +44,7 @@ model User {
   posts   Post[]
   profile Profile?
   isAdmin Boolean @default(false)
-  city    String
+  city    String  @default("Awesome City")
 
   @@unique([name, city])
 }
