@@ -19,6 +19,7 @@ model Post {
   title     String    @db.VarChar(255)
   content   String?
   published Boolean   @default(false)
+  role      Role      @default(USER)
   author    User      @relation(fields: [authorId], references: [id])
   authorId  Int
 }
@@ -36,4 +37,9 @@ model User {
   name    String? 
   posts   Post[]
   profile Profile?
+}
+
+enum Role {
+  USER
+  ADMIN
 }
