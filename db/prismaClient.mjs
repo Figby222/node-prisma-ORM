@@ -18,6 +18,13 @@ async function main() {
 
     console.log(user);
     
+    const post = await prisma.post.update({
+        where: { id: 1 },
+        data: { published: true },
+    });
+
+    console.log(post);
+    
     const allUsers = await prisma.user.findMany({
         include: {
             posts: true,
