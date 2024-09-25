@@ -54,3 +54,40 @@ main()
         await prisma.$disconnect();
         process.exit(1);
     })
+
+
+
+
+
+
+
+async function useQueries() {
+    await prisma.user.update({
+        where: { id: 3 },
+        data: { id: 4}
+    })
+    await prisma.user.findMany().then(console.log);
+    await prisma.post.findMany({
+        where: {
+            OR: [
+                { title: { contains: "prisma" }},
+                { content: { contains: "prisma" }},
+                { title: { contains: "Hi" }},
+                { content: { contains: "Hi" }}
+
+            ]
+        }
+    }).then(console.log);
+
+    await prisma.user.create({
+        data: {
+            name: "Me Ryan",
+            email: "Ryan@me.com",
+            posts: {
+                create: { title: "Hi" }
+            },
+        },
+    }).then(console.log);
+}
+
+useQueries();
