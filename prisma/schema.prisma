@@ -39,6 +39,7 @@ model User {
   name    String?
   posts   Post[]
   profile Profile?
+  isAdmin Boolean @default(false)
 }
 
 model Category {
