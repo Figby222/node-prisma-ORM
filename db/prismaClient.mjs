@@ -24,6 +24,16 @@ async function main() {
     });
 
     console.log(post);
+
+    const createPost = await prisma.post.create({
+        data: {
+            title: "Hi",
+            content: "Hi",
+            authorId: 1
+        }
+    })
+
+    console.log(createPost);
     
     const allUsers = await prisma.user.findMany({
         include: {
