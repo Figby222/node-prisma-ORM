@@ -601,6 +601,16 @@ class RawQueries {
         )
             .then(console.log);
     }
+
+    static async activeEmailParamaterizedQuery() {
+        const result = prisma
+            .$executeRawUnsafe(
+            `UPDATE User SET active = $1 WHERE emailValidated = $2`,
+            `cookies@cookies.com`,
+            true
+        )
+            .then(console.log);
+    }
 }
 
 
@@ -611,4 +621,4 @@ class RawQueries {
 
 
 
-RawQueries.activeEmailValidated();
+RawQueries.activeEmailParamaterizedQuery();
