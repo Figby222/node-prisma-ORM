@@ -561,6 +561,11 @@ class RawQueries {
         const name2 = `Ryan`;
         const result2 = await prisma.$queryRaw`SELECT 'My name is ' || ${name2}`.then(console.log);
     }
+
+    static async tablename() {
+        const userTable = `User`;
+        const result = await prisma.$queryRawUnsafe(`SELECT * FROM ${userTable}`).then(console.log);
+    }
 }
 
 
@@ -570,4 +575,4 @@ class RawQueries {
 
 
 
-RawQueries.$queryRaw4();
+RawQueries.tablename();
