@@ -434,6 +434,20 @@ class CRUD {
     static async deleteAll() {
         const deleteUsers = await prisma.user.deleteMany({}).then(console.log);
     }
+
+    static async deleteUserCascade() {
+        const deletePosts = prisma.post.deleteMany({
+            where: {
+                authorId: 17
+            }
+        }).then(console.log);
+
+        const deleteUser = prisma.user.delete({
+            where: {
+                id: 17
+            }
+        }).then(console.log);
+    }
 }
 
 CRUD.deleteMany();
