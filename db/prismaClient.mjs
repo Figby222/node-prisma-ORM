@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, Prisma } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -181,12 +181,32 @@ async function updateAuthor() {
 
 class CRUD {
     static async create() {
+        const includePosts = false;
+        let user = Prisma.UserCreateInput;
+
+        if (includePosts) {
+            user = {
+                email: "HI@HI@HI@HI",
+                name: "HI@HI@HI@HI",
+                posts: {
+                    create: {
+                        title: "Awesome post"
+                    },
+                },
+            }
+        } else {
+            user = {
+                email: "HI@HI@HI@HI",
+                name: "HI@HI@HI@HI"
+            }
+        }
         const user = await prisma.user.create({
             data: {
                 email: "blahblahblah@blahblahblah.com",
                 name: "blahblahblahblah"
             }
         })
+        const createUser = await prisma.user.create({ data: user }).then(console.log);
     }
 }
 
