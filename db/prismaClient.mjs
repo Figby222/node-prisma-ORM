@@ -309,6 +309,32 @@ class CRUD {
             }
         }).then(console.log);
     }
+
+    static async selectSpecificFields() {
+        const user = await prisma.user.findUnique({
+            where: {
+                email: "Ryan@me.com"
+            },
+            select: {
+                email: true,
+                name: true
+            }
+        }).then(console.log);
+
+        const user2 = await prisma.user.findUnique({
+            where: {
+                email: "Ryan@me.com"
+            },
+            select: {
+                email: true,
+                posts: {
+                    select: {
+                        title: true
+                    }
+                }
+            }
+        }).then(console.log);
+    }
 }
 
-CRUD.filterRecords();
+CRUD.selectSpecificFields();
