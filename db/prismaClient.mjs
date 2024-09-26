@@ -335,6 +335,18 @@ class CRUD {
             }
         }).then(console.log);
     }
+
+    static async selectRelatedRecords() {
+        const users = await prisma.user.findMany({
+            where: {
+                role: "ADMIN",
+            },
+            include: {
+                posts: true
+            }
+        })
+            .then(console.log);
+    }
 }
 
-CRUD.selectSpecificFields();
+CRUD.selectRelatedRecords();
