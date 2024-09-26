@@ -200,14 +200,25 @@ class CRUD {
                 name: "HI@HI@HI@HI"
             }
         }
-        const user = await prisma.user.create({
-            data: {
-                email: "blahblahblah@blahblahblah.com",
-                name: "blahblahblahblah"
-            }
-        })
+        // const user = await prisma.user.create({
+        //     data: {
+        //         email: "blahblahblah@blahblahblah.com",
+        //         name: "blahblahblahblah"
+        //     }
+        // })
         const createUser = await prisma.user.create({ data: user }).then(console.log);
+    }
+
+    static async createMany() {
+        const createMany = await prisma.user.createMany({
+            data: [
+                { name: "A", email: "A@A" },
+                { name: "AA", email :"AA@AA" },
+                { name: "AAA", email: "AAA@AAA" },
+                { name: "AAAA", email: "AAAA@AAAA" }
+            ],
+        }).then(console.log);
     }
 }
 
-CRUD.create();
+CRUD.createMany();
