@@ -371,6 +371,21 @@ class CRUD {
             },
         }).then(console.log);
     }
+
+    static async upsertUser() {
+        const upsertUser = await prisma.user.upsert({
+            where: {
+                email: "cookies@cookies.com",
+            },
+            update: {
+                name: "Cookies"
+            },
+            create: {
+                email: "cookies@cookies.com",
+                name: "Cookies@Cookies",
+            }
+        }).then(console.log);
+    }
 }
 
-CRUD.updateMany();
+CRUD.upsertUser();
