@@ -265,6 +265,50 @@ class CRUD {
             }
         }).then(console.log);
     }
+
+    static async filterRecords() {
+        const users = await prisma.user.findMany({
+            where: {
+                email: {
+                    endsWith: ".com"
+                },
+            },
+        }).then(console.log);
+
+        const users2 = await prisma.user.findMany({
+            where: {
+                OR: [
+                    {
+                        name: {
+                            startsWith: "R",
+                        }
+                    },{
+                        AND: {
+                            name: {
+                                startsWith: "y",
+                            },
+                            role: {
+                                equals: "ADMIN",
+                            }
+                        }
+                    }
+                ]
+            }
+        }).then(console.log);
+
+        const users3 = await prisma.user.findMany({
+            where: {
+                email: {
+                    endsWith: ".com"
+                },
+                posts: {
+                    some: {
+                        published: true,
+                    }
+                }
+            }
+        }).then(console.log);
+    }
 }
 
-CRUD.findFirst();
+CRUD.filterRecords();
