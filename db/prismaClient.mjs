@@ -472,6 +472,67 @@ class CRUD {
                 console.log({ error });
             }
     }
+
+    static async advancedQuery() {
+        const user = await prisma.user.create({
+            include: {
+                posts: {
+                    include: {
+                        categories: true,
+                    },
+                },
+            },
+            data: {
+                email: "supercookies@supercookies@supercookies@supercookies",
+                posts: {
+                    create: [
+                        {
+                            title: "Awesome Post",
+                            categories: {
+                                connectOrCreate: [
+                                    {
+                                        create: { name: "Introductions" },
+                                        where: {
+                                            id: 3,
+                                            name: "Introductions",
+                                        },
+                                    },
+                                    {
+                                        create: { name: "Social" },
+                                        where: {
+                                            id: 4,
+                                            name: "Social",
+                                        },
+                                    },
+                                ],
+                            },
+                        },
+                        {
+                            title: "How to make cookies",
+                            categories: {
+                                connectOrCreate: [
+                                    {
+                                        create: { name: "Social" },
+                                        where: {
+                                            id: 4,
+                                            name: "Social",
+                                        },
+                                    },
+                                    {
+                                        create: { name: "Cooking" },
+                                        where: {
+                                            id: 5,
+                                            name: "Cooking",
+                                        },
+                                    },
+                                ],
+                            },
+                        },
+                    ],
+                },
+            },
+        }).then(console.log);
+    }
 }
 
-CRUD.deleteMany();
+CRUD.advancedQuery();
