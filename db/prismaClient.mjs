@@ -177,4 +177,17 @@ async function updateAuthor() {
     }).then(console.log)
 }
 
-updateAuthor();
+// updateAuthor();
+
+class CRUD {
+    static async create() {
+        const user = await prisma.user.create({
+            data: {
+                email: "blahblahblah@blahblahblah.com",
+                name: "blahblahblahblah"
+            }
+        })
+    }
+}
+
+CRUD.create();
