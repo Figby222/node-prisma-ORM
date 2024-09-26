@@ -591,6 +591,16 @@ class RawQueries {
         const name2 =  `Ryan`;
         const greeting = await prisma.$executeRaw`UPDATE user SET greeting = 'My name is ' || ${name}`.then(console.log);
     }
+
+    static async activeEmailValidated() {
+        const emailValidated = true;
+        const active = true;
+
+        const result = await prisma.$executeRawUnsafe(
+            `UPDATE User SET active = ${active} WHERE emailValidated = ${emailValidated}`
+        )
+            .then(console.log);
+    }
 }
 
 
@@ -601,4 +611,4 @@ class RawQueries {
 
 
 
-RawQueries.executeRaw3();
+RawQueries.activeEmailValidated();
