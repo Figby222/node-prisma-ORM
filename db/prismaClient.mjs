@@ -573,6 +573,10 @@ class RawQueries {
             `cookies@cookies.com`
         )
     }
+
+    static async executeRaw() {
+        const result = await prisma.$executeRaw`UPDATE User SET active = true WHERE emailValidated = true`.then(console.log);
+    }
 }
 
 
@@ -582,4 +586,4 @@ class RawQueries {
 
 
 
-RawQueries.paramaterizedQuery();
+RawQueries.executeRaw();
