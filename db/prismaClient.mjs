@@ -248,6 +248,23 @@ class CRUD {
     static async findMany() {
         const users = await prisma.user.findMany().then(console.log);
     }
+
+    static async findFirst() {
+        const findUser = await prisma.user.findFirst({
+            where: {
+                posts: {
+                    some: {
+                        title: {
+                            contains: "a"
+                        }
+                    }
+                }
+            },
+            orderBy: {
+                id: "desc",
+            }
+        }).then(console.log);
+    }
 }
 
-CRUD.findMany();
+CRUD.findFirst();
