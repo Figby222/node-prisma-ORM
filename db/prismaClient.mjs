@@ -230,6 +230,20 @@ class CRUD {
             ]
         }).then(console.log);
     }
+
+    static async findUnique() {
+        const user = await prisma.user.findUnique({
+            where: {
+                email: "Ryan@me.com"
+            },
+        }).then(console.log);
+
+        const user2 = await prisma.user.findUnique({
+            where: {
+                id: 4
+            },
+        }).then(console.log);
+    }
 }
 
-CRUD.createManyAndReturn();
+CRUD.findUnique();
