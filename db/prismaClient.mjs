@@ -553,6 +553,14 @@ class RawQueries {
             Prisma.sql`SELECT * FROM User WHERE email = ${email}`
         ).then(console.log);
     }
+
+    static async $queryRaw4() {
+        const name = `My name is Ryan`;
+        const result = await prisma.$queryRaw`SELECT ${name}`.then(console.log);
+
+        const name2 = `Ryan`;
+        const result2 = await prisma.$queryRaw`SELECT 'My name is ' || ${name2}`.then(console.log);
+    }
 }
 
 
@@ -562,4 +570,4 @@ class RawQueries {
 
 
 
-RawQueries.$queryRaw3();
+RawQueries.$queryRaw4();
