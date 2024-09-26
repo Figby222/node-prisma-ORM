@@ -347,6 +347,17 @@ class CRUD {
         })
             .then(console.log);
     }
+
+    static async update() {
+        const updateUser = await prisma.user.update({
+            where: {
+                id: 8
+            },
+            data: {
+                name: "A"
+            }
+        }).then(console.log);
+    }
 }
 
-CRUD.selectRelatedRecords();
+CRUD.update();
