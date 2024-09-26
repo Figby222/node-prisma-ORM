@@ -412,6 +412,14 @@ class CRUD {
             }
         }).then(console.log);
     }
+
+    static async delete() {
+        const deleteUser = await prisma.user.delete({
+            where: {
+                id: 17
+            }
+        }).then(console.log)
+    }
 }
 
-CRUD.updatePinnedBy();
+CRUD.delete();
