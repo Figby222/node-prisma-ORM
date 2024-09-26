@@ -535,4 +535,12 @@ class CRUD {
     }
 }
 
-CRUD.advancedQuery();
+// CRUD.advancedQuery();
+
+class RawQueries {
+    static async $queryRaw() {
+        const result = await prisma.$queryRaw`SELECT * FROM User`.then(console.log);
+    }
+}
+
+RawQueries.$queryRaw();
