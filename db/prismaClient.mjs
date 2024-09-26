@@ -566,6 +566,13 @@ class RawQueries {
         const userTable = `User`;
         const result = await prisma.$queryRawUnsafe(`SELECT * FROM ${userTable}`).then(console.log);
     }
+
+    static async paramaterizedQuery() {
+        prisma.$queryRawUnsafe(
+            `SELECT * FROM users WHERE email = $1`,
+            `cookies@cookies.com`
+        )
+    }
 }
 
 
@@ -575,4 +582,4 @@ class RawQueries {
 
 
 
-RawQueries.tablename();
+RawQueries.paramaterizedQuery();
