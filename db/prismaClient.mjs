@@ -219,6 +219,17 @@ class CRUD {
             ],
         }).then(console.log);
     }
+
+    static async createManyAndReturn() {
+        const createManyAndReturn = await prisma.user.createManyAndReturn({
+            data: [
+                { name: "asd", email: "asdf@a" },
+                { name: "affas", email: "afgad@sd" },
+                { name: "asfgdagds", email: "afgds@fgh" },
+                { name: "afdsagagdsgads", email: "agdsagds@jklz"}
+            ]
+        }).then(console.log);
+    }
 }
 
-CRUD.createMany();
+CRUD.createManyAndReturn();
