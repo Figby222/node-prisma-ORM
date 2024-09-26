@@ -375,14 +375,14 @@ class CRUD {
     static async upsertUser() {
         const upsertUser = await prisma.user.upsert({
             where: {
-                email: "cookies@cookies.com",
+                email: "cookies@cookiessssssss.com",
             },
             update: {
                 name: "Cookies"
             },
             create: {
-                email: "cookies@cookies.com",
-                name: "Cookies@Cookies",
+                email: "cookies@cookiessssssss.com",
+                name: "Cookies@Cookiessssssss",
             }
         }).then(console.log);
     }
@@ -420,6 +420,16 @@ class CRUD {
             }
         }).then(console.log)
     }
+
+    static async deleteMany() {
+        const deleteUsers = await prisma.user.deleteMany({
+            where: {
+                id: {
+                    gt: 24
+                }
+            }
+        }).then(console.log);
+    }
 }
 
-CRUD.delete();
+CRUD.deleteMany();
