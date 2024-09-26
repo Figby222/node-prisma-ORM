@@ -448,6 +448,14 @@ class CRUD {
             }
         }).then(console.log);
     }
+
+    static async deleteAllTables() {
+        const deletePosts = prisma.post.deleteMany().then(console.log);
+        const deleteProfile = prisma.profile.deleteMany().then(console.log);
+        const deleteUsers = prisma.user.deleteMany().then(console.log);
+
+        await prisma.$transaction([deleteProfile, deletePosts, deleteUsers ]);
+    }
 }
 
 CRUD.deleteMany();
