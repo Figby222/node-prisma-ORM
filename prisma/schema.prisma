@@ -20,10 +20,13 @@ model Post {
   content    String?
   published  Boolean    @default(false)
   data       Json       @default("{ \"Hello \": \"Hello\" }")
-  author     User       @relation(fields: [authorId], references: [id])
+  author     User       @relation("WrittenPosts", fields: [authorId], references: [id])
   authorId   Int
   categories Category[]
   comments   Comment[]
+  pinnedBy   User?      @relation("PinnedPost", fields: [pinnedById], references: [id])
+  pinnedById Int?       @unique
+
 
   @@index ([title, content])
 }
@@ -39,11 +42,13 @@ model User {
   id      Int      @id @default(autoincrement())
   email   String   @unique
   name    String?
-  posts   Post[]
+  posts   Post[] @relation("WrittenPosts")
   profile Profile?
   role    Role       @default(USER)
   isAdmin Boolean @default(false)
   city    String?  @default("Awesome City")
+  // writtenPosts Post[]     @relation("WrittenPosts")
+  pinnedPost Post?        @relation("PinnedPost")
 
   @@unique([name, city])
 }
