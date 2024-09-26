@@ -244,6 +244,10 @@ class CRUD {
             },
         }).then(console.log);
     }
+
+    static async findMany() {
+        const users = await prisma.user.findMany().then(console.log);
+    }
 }
 
-CRUD.findUnique();
+CRUD.findMany();
