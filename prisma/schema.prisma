@@ -54,9 +54,11 @@ model User {
 }
 
 model Category {
-  id    Int    @id @default(autoincrement())
-  name  String @unique
+  id    Int    @default(autoincrement())
+  name  String
   posts Post[]
+  
+  @@id ([name, id])
 }
 
 enum Role {
