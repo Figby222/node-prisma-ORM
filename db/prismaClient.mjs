@@ -386,6 +386,32 @@ class CRUD {
             }
         }).then(console.log);
     }
+
+    static async updatePinnedBy() {
+        const updatePinnedBy = await prisma.post.updateMany({
+            where: {
+                pinnedById: {
+                    lt: 4
+                }
+            },
+            data: {
+                pinnedById: 4
+            }
+        }).then(console.log);
+
+        const updatePinnedBy2 = await prisma.post.updateMany({
+            where: {
+                pinnedById: {
+                    lt: 4
+                }
+            },
+            data: {
+                pinnedById: {
+                    increment: 3
+                }
+            }
+        }).then(console.log);
+    }
 }
 
-CRUD.upsertUser();
+CRUD.updatePinnedBy();
