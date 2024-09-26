@@ -358,6 +358,19 @@ class CRUD {
             }
         }).then(console.log);
     }
+
+    static async updateMany() {
+        const updateUsers = await prisma.user.updateMany({
+            where: {
+                email: {
+                    contains: ".com"
+                },
+            },
+            data: {
+                role: "ADMIN",
+            },
+        }).then(console.log);
+    }
 }
 
-CRUD.update();
+CRUD.updateMany();
