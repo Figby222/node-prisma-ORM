@@ -430,6 +430,10 @@ class CRUD {
             }
         }).then(console.log);
     }
+
+    static async deleteAll() {
+        const deleteUsers = await prisma.user.deleteMany({}).then(console.log);
+    }
 }
 
 CRUD.deleteMany();
