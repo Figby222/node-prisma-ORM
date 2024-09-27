@@ -13,11 +13,10 @@ model Post {
   updatedAt  DateTime   @updatedAt
   title      String     @db.VarChar(255)
   content    String?
-  published  Boolean    @default(false)
-  status     Status     @default(Unknown)
   authorId   Int
   data       Json       @default("{\"Hello \": \"Hello\"}")
   pinnedById Int?       @unique
+  status     Status     @default(Unknown)
   comments   Comment[]
   author     User       @relation("WrittenPosts", fields: [authorId], references: [id])
   pinnedBy   User?      @relation("PinnedPost", fields: [pinnedById], references: [id])
