@@ -630,6 +630,11 @@ class RawQueries {
             userName ? Prisma.sql`WHERE name = ${userName}` : Prisma.empty
         }`.then(console.log);
     }
+
+    static async alterUser() {
+        const password = "blah blah blah blah";
+        const result = await prisma.$executeRawUnsafe(`ALTER USER prisma WITH PASSWORD "$1"`, password)
+    }
 }
 
 
@@ -640,4 +645,4 @@ class RawQueries {
 
 
 
-RawQueries.taggedTemplateHelpers();
+RawQueries.alterUser();
