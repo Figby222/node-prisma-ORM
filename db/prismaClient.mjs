@@ -679,6 +679,16 @@ class RawQueries {
 
         const result = await prisma.queryRaw(query).then(console.log);
     }
+
+    static async buildQuery3() {
+        const userName = `Awesome Slice`;
+        const email = `AwesomeSlice@AwesomeSlice.com`;
+        const result = await prisma.$queryRawUnsafe(
+            `SELECT * FROM User WHERE (name = $1 OR email = $2)`,
+            userName,
+            email
+        ).then(console.log);
+    }
 }
 
 
