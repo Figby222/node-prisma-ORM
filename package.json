@@ -4,7 +4,8 @@
   "description": "A Node.js repository used to practice using Prisma ORM",
   "main": "index.mjs",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "data-migration:add_status_column": "node ./prisma/migrations/20240927093349_add_status_column/data-migration.js"
   },
   "repository": {
     "type": "git",
