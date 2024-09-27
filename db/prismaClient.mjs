@@ -702,6 +702,198 @@ class RawQueries {
     }
 }
 
+async function populateDb() {
+    const user = await prisma.user.create({
+        data: {
+            name: "Cookies",
+            email: "cookies@cookies.cookies",
+            posts: {
+                create: { title: "Hi" }
+            },
+            profile: {
+                create: { bio: "Sandwich Cookies" }
+            },
+        },
+    })
+
+    const createPost = await prisma.post.create({
+        data: {
+            title: "Hi",
+            content: "Hi",
+            authorId: 1
+        }
+    })
+
+    await prisma.user.create({
+        data: {
+            name: "Me",
+            email: "me@me.com",
+            posts: {
+                create: { title: "Hi" }
+            },
+        },
+    }).then(console.log);
+
+    await prisma.user.create({
+        data: {
+            name: "Me Ryan",
+            email: "Ryan@me.com",
+            posts: {
+                create: { title: "Hi" }
+            },
+        },
+    }).then(console.log);
+
+    const user2 = await prisma.user.create({
+        data: {
+            email: "hi@me.com",
+            name: "me",
+            posts: {
+                create: [
+                    {
+                        title: "Hi, super awesome cool stuff",
+                        categories: {
+                            create: {
+                                name: "Super awesome cool stuff"
+                            },
+                        },
+                    },
+                    {
+                        title: "PostgreSQL database",
+                        categories: {
+                            create: [
+                                {
+                                    name: "Database"
+                                },
+                                {
+                                    name: "Super awesome cool learning stuff"
+                                },
+                            ],
+                        },
+                    }
+                ],
+            },
+        },
+    });
+
+    const userAndPosts = await prisma.user.create({
+        data: {
+            email: "AwesomeEmail@AwesomeDomain.com",
+            name: "Awesome Name",
+            posts: {
+                create: [
+                    { title: "blah blah blah" },
+                    { title: "blah blah blah blah" }
+                ]
+            }
+        }
+    })
+
+    const includePosts = false;
+        let user3 = Prisma.UserCreateInput;
+
+        if (includePosts) {
+            user3 = {
+                email: "HI@HI@HI@HI",
+                name: "HI@HI@HI@HI",
+                posts: {
+                    create: {
+                        title: "Awesome post"
+                    },
+                },
+            }
+        } else {
+            user3 = {
+                email: "HI@HI@HI@HI",
+                name: "HI@HI@HI@HI"
+            }
+        }
+        // const user = await prisma.user.create({
+        //     data: {
+        //         email: "blahblahblah@blahblahblah.com",
+        //         name: "blahblahblahblah"
+        //     }
+        // })
+        const createUser = await prisma.user.create({ data: user3 }).then(console.log);
+
+        const createMany = await prisma.user.createMany({
+            data: [
+                { name: "A", email: "A@A" },
+                { name: "AA", email :"AA@AA" },
+                { name: "AAA", email: "AAA@AAA" },
+                { name: "AAAA", email: "AAAA@AAAA" }
+            ],
+        }).then(console.log);
+
+        const createManyAndReturn = await prisma.user.createManyAndReturn({
+            data: [
+                { name: "asd", email: "asdf@a" },
+                { name: "affas", email: "afgad@sd" },
+                { name: "asfgdagds", email: "afgds@fgh" },
+                { name: "afdsagagdsgads", email: "agdsagds@jklz"}
+            ]
+        }).then(console.log);
+
+        const user4 = await prisma.user.create({
+            include: {
+                posts: {
+                    include: {
+                        categories: true,
+                    },
+                },
+            },
+            data: {
+                email: "supercookies@supercookies@supercookies@supercookies",
+                posts: {
+                    create: [
+                        {
+                            title: "Awesome Post",
+                            categories: {
+                                connectOrCreate: [
+                                    {
+                                        create: { name: "Introductions" },
+                                        where: {
+                                            id: 3,
+                                            name: "Introductions",
+                                        },
+                                    },
+                                    {
+                                        create: { name: "Social" },
+                                        where: {
+                                            id: 4,
+                                            name: "Social",
+                                        },
+                                    },
+                                ],
+                            },
+                        },
+                        {
+                            title: "How to make cookies",
+                            categories: {
+                                connectOrCreate: [
+                                    {
+                                        create: { name: "Social" },
+                                        where: {
+                                            id: 4,
+                                            name: "Social",
+                                        },
+                                    },
+                                    {
+                                        create: { name: "Cooking" },
+                                        where: {
+                                            id: 5,
+                                            name: "Cooking",
+                                        },
+                                    },
+                                ],
+                            },
+                        },
+                    ],
+                },
+            },
+        }).then(console.log);
+
+}
 
 
 
@@ -710,4 +902,5 @@ class RawQueries {
 
 
 
-RawQueries.alterUser();
+populateDb();
+// RawQueries.alterUser();
