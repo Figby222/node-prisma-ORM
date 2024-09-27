@@ -615,6 +615,11 @@ class RawQueries {
     static async typeCast() {
         const result = await prisma.$queryRaw`SELECT LENGTH(${42}::text)`.then(console.log);
     }
+
+    static async taggedTemplate() {
+        const userId = 4;
+        const result = await prisma.$queryRaw`SELECT * FROM User WHERE id = ${userId}`.then(console.log);
+    }
 }
 
 
@@ -625,4 +630,4 @@ class RawQueries {
 
 
 
-RawQueries.typeCast();
+RawQueries.taggedTemplate();
