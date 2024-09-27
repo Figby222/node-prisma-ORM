@@ -611,6 +611,10 @@ class RawQueries {
         )
             .then(console.log);
     }
+
+    static async typeCast() {
+        const result = await prisma.$queryRaw`SELECT LENGTH(${42}::text)`.then(console.log);
+    }
 }
 
 
@@ -621,4 +625,4 @@ class RawQueries {
 
 
 
-RawQueries.activeEmailParamaterizedQuery();
+RawQueries.typeCast();
