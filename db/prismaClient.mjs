@@ -656,6 +656,17 @@ class RawQueries {
         const result = await prisma.$queryRaw(query);
         console.log(result);
     }
+
+    static async buildQuery() {
+        const query1 = `SELECT id, name FROM "User" WHERE name = `;
+        const query2 = ` OR name = `;
+
+        const inputString1 = "Awesome Slice";
+        const inputString2 = `'Sarah' UNION SELECT id, title FROM "Post"`;
+
+        const query = Prisma.sql([query1, query2, ""], inputString1, inputString2);
+        const result = await prisma.$queryRaw(query).then(console.log);
+    }
 }
 
 
