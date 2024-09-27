@@ -667,6 +667,18 @@ class RawQueries {
         const query = Prisma.sql([query1, query2, ""], inputString1, inputString2);
         const result = await prisma.$queryRaw(query).then(console.log);
     }
+
+    static async buildQuery2() {
+        const query1 = `SELECT id, name FROM "user" `;
+        const query2 = `WHERE name = $1 `;
+
+        query = Prisma.raw(`${query1}${query2}`);
+
+        const inputString = `'Sarah' UNION SELECT id, title FROM "Post"`;
+        query.values = [inputString];
+
+        const result = await prisma.queryRaw(query).then(console.log);
+    }
 }
 
 
