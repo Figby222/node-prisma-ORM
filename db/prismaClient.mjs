@@ -648,7 +648,7 @@ class RawQueries {
     static async safeQuery2() {
         const query
 
-        query = Prisma.sql`SELECT id, name FROM "User" WHERE name = $1`;
+        = Prisma.sql`SELECT id, name FROM "User" WHERE name = $1`;
 
         const inputString = `'Sarah' UNION SELECT id, title FROM "Post"`;
         query.values = [inputString];
