@@ -635,6 +635,15 @@ class RawQueries {
         const password = "blah blah blah blah";
         const result = await prisma.$executeRawUnsafe(`ALTER USER prisma WITH PASSWORD "$1"`, password)
     }
+
+    static async safeQuery() {
+        const inputString = `'Sarah' UNION SELECT id, title FROM "Post"`;
+
+        const query = Prisma.sql`SELECT id, name FROM "User" WHERE name = ${inputString}`;
+
+        const result = await prisma.$queryRaw(query);
+        console.log(result);
+    }
 }
 
 
