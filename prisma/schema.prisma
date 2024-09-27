@@ -14,7 +14,7 @@ model Post {
   title      String     @db.VarChar(255)
   content    String?
   published  Boolean    @default(false)
-  status     Status
+  status     Status     @default(Unknown)
   authorId   Int
   data       Json       @default("{\"Hello \": \"Hello\"}")
   pinnedById Int?       @unique
