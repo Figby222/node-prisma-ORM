@@ -620,6 +620,16 @@ class RawQueries {
         const userId = 4;
         const result = await prisma.$queryRaw`SELECT * FROM User WHERE id = ${userId}`.then(console.log);
     }
+
+    static async taggedTemplateHelpers() {
+        const ids = [ 1, 2, 3, 4 ];
+        const result = await prisma.$queryRaw`SELECT * FROM User WHERE id IN (${Prisma.join(ids)})`.then(console.log);
+
+        const userName = '';
+        const result2 = await prisma.$queryRaw`SELECT * FROM User ${
+            userName ? Prisma.sql`WHERE name = ${userName}` : Prisma.empty
+        }`.then(console.log);
+    }
 }
 
 
@@ -630,4 +640,4 @@ class RawQueries {
 
 
 
-RawQueries.taggedTemplate();
+RawQueries.taggedTemplateHelpers();
