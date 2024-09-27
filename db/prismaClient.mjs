@@ -689,6 +689,17 @@ class RawQueries {
             email
         ).then(console.log);
     }
+
+    static async buildQuery4() {
+        const userName = `Awesome Slice`;
+        const emailFragment = `AwesomeSlice.com`;
+
+        const result = await prisma.$queryRawUnsafe(
+            `SELECT * FROM "User" WHERE (name = $1 OR email ILIKE $2)`,
+            userName,
+            `%${emailFragment}`
+        ).then(console.log);
+    }
 }
 
 
